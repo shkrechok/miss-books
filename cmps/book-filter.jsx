@@ -31,7 +31,7 @@ export function BookFilter({ filterBy, onSetFilter }) {
                 <label htmlFor="txt">Title:</label>
                 <input value={txt} onChange={handleChange} name="txt" id="txt" type="text" placeholder="By title" />
 
-                <label htmlFor="maxPrice">Min Speed:</label>
+                <label htmlFor="maxPrice">Max price:</label>
                 <input value={maxPrice} onChange={handleChange} type="number" name="maxPrice" id="maxPrice" placeholder="By max price" />
 
                 <button className="filter-btn">Filter books</button>
