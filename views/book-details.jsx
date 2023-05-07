@@ -2,17 +2,19 @@ import { LongTxt } from "../cmps/long-txt.jsx"
 import { utilService } from "../services/util.service.js"
 
 export function BookDetails({ book, onBack }) {
-     
+
     let priceClass = ''
     if (book.listPrice.amount > 150) priceClass = 'red'
     if (book.listPrice.amount < 20) priceClass = 'green'
-    
+
     return (
         <section className="book-details">
             <h1>Book title: {book.title}</h1>
             {book.listPrice.isOnSale && <h3 className="on-sale">on sale!</h3>}
             <h5 className={priceClass}>Book price: {book.listPrice.amount} {utilService.currencyToSymbol(book.listPrice.currencyCode)}</h5>
-            <h5>{_pageCountToText(book.pageCount)} | {_publishedDateToText(book.publishedDate)}</h5>
+            <h5>{_pageCountToText(book.pageCount)}
+                {_pageCountToText(book.pageCount) && _publishedDateToText(book.publishedDate) && ' | '}
+                {_publishedDateToText(book.publishedDate)}</h5>
             <img src={book.thumbnail} alt="" />
             <LongTxt txt={book.description} />
             <button onClick={onBack}>Back</button>
@@ -49,5 +51,4 @@ function _publishedDateToText(publishedDate) {
 //     "currencyCode": "EUR",
 //     "isOnSale": false
 //     }
-{/* <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fuga, velit reiciendis sed optio eum saepe! Aliquid necessitatibus atque est quasi unde odit voluptate! Vero, dolor sunt molestiae possimus labore suscipit?</p> */}
-   
+{/* <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fuga, velit reiciendis sed optio eum saepe! Aliquid necessitatibus atque est quasi unde odit voluptate! Vero, dolor sunt molestiae possimus labore suscipit?</p> */ }
