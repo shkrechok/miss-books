@@ -9,6 +9,7 @@ export function BookDetails({ book, onBack }) {
     return (
         <section className="book-details">
             <h1>Book title: {book.title}</h1>
+            {book.listPrice.isOnSale && <h3 className="on-sale">on sale!</h3>}
             <h5 className={priceClass}>Book price: {book.listPrice.amount} {utilService.currencyToSymbol(book.listPrice.currencyCode)}</h5>
             <h5>{_pageCountToText(book.pageCount)} | {_publishedDateToText(book.publishedDate)}</h5>
             <img src={book.thumbnail} alt="" />

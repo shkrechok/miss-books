@@ -43,3 +43,8 @@ object {
 .debug * {
   outline: 1px solid gold
 }
+
+.on-sale {
+  color: var(--clrPr1);
+  text-transform: uppercase;
+}

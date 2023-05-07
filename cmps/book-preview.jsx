@@ -5,6 +5,7 @@ export function BookPreview({ book }) {
     return (
         <article className="book-preview">
             <h2>Book title: {book.title}</h2>
+            {book.listPrice.isOnSale && <h3 className="on-sale">on sale!</h3>}
             <h4>Book price: {book.listPrice.amount} {utilService.currencyToSymbol(book.listPrice.currencyCode)}</h4>
             <img src={book.thumbnail} alt="" />
         </article>
