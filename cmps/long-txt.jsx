@@ -1,6 +1,6 @@
 const {useState} = React
 
-export function LongTxt({txt}){
+export function LongTxt({txt, length = 100}){
 
     const [isLongTxtShown, setIsLongTxtShown] = useState(false)
 

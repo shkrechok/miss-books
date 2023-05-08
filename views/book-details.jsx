@@ -16,7 +16,7 @@ export function BookDetails({ book, onBack }) {
                 {_pageCountToText(book.pageCount) && _publishedDateToText(book.publishedDate) && ' | '}
                 {_publishedDateToText(book.publishedDate)}</h5>
             <img src={book.thumbnail} alt="" />
-            <LongTxt txt={book.description} />
+            <LongTxt txt={book.description} length={50} />
             <button onClick={onBack}>Back</button>
         </section>
     )
