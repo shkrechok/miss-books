@@ -1,8 +1,35 @@
 import { LongTxt } from "../cmps/long-txt.jsx"
 import { utilService } from "../services/util.service.js"
+import { bookService } from "../services/book.service.js"
 
-export function BookDetails({ book, onBack }) {
+const { useEffect, useState } = React
+const { useParams, useNavigate } = ReactRouterDOM
 
+export function BookDetails() {
+    const [book, setBook] = useState(null)
+    const params = useParams()
+    const navigate = useNavigate()
+    
+    useEffect(() => {
+        loadBook()
+    }, [])
+
+    function loadBook() {
+        bookService.get(params.bookId)
+            .then(setBook)
+            .catch(err => {
+                console.log('Had issued in book details:', err);
+                navigate('/book')
+            })
+    }
+
+    
+    function onBack() {
+        navigate('/book')
+        // navigate(-1)
+    }
+
+    if (!book) return <div>Loading...</div>
     let priceClass = ''
     if (book.listPrice.amount > 150) priceClass = 'red'
     if (book.listPrice.amount < 20) priceClass = 'green'
@@ -21,6 +48,7 @@ export function BookDetails({ book, onBack }) {
         </section>
     )
 
+    
 }
 
 function _pageCountToText(pageCount) {

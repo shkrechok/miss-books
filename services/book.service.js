@@ -460,7 +460,7 @@ export const bookService = {
 }
 
 function query(filterBy = {}) {
-    console.log('filterBy service:', filterBy)
+    // console.log('filterBy service:', filterBy)
     return storageService.query(BOOKS_KEY)
         .then(books => {
             if (filterBy.txt) {
@@ -492,8 +492,8 @@ function save(book) {
     }
 }
 
-function getEmptyBook(title = '', listPrice = '') {
-    return { id: '', title, listPrice }
+function getEmptyBook(title = '', price = 50) {
+    return { id: '', title, listPrice: { amount: price }  }
 }
 
 function getDefaultFilter() {
@@ -519,8 +519,8 @@ function _createBooks() {
 //     }
 // }
 
-function _createBook(title, listPrice = 50) {
-    const book = getEmptyBook(title, listPrice)
+function _createBook(title, price = 50) {
+    const book = getEmptyBook(title, price)
     book.id = utilService.makeId()
     return book
 }

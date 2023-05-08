@@ -34,19 +34,24 @@ export function BookIndex() {
         setFilterBy(prevFilterBy => ({ ...prevFilterBy, ...filterBy }))
     }
 
-    function onSelectBook(book){
-        setSelectedBook(book)
-    }
+    // function onSelectBook(book){
+    //     setSelectedBook(book)
+    // }
 
-    console.log('render');
+    // console.log('render');
     return (
         <section className="book-index">
-            {!selectedBook && <React.Fragment>
+            
                 <BookFilter onSetFilter={onSetFilter} filterBy={filterBy} />
-                <BookList onSelectBook={onSelectBook} books={books} onRemoveBook={onRemoveBook} />
-            </React.Fragment>}
+                <BookList  books={books} onRemoveBook={onRemoveBook} />
 
-            {selectedBook && <BookDetails onBack={()=>setSelectedBook(null)} book={selectedBook} />}
         </section>
     )
 }
+
+// {!selectedBook && <React.Fragment>
+//     <BookFilter onSetFilter={onSetFilter} filterBy={filterBy} />
+//     <BookList onSelectBook={onSelectBook} books={books} onRemoveBook={onRemoveBook} />
+// </React.Fragment>}
+
+// {selectedBook && <BookDetails onBack={()=>setSelectedBook(null)} book={selectedBook} />}
