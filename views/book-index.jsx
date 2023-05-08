@@ -5,6 +5,7 @@ import { BookFilter } from "../cmps/book-filter.jsx"
 import { BookList } from "../cmps/book-list.jsx"
 import { bookService } from "../services/book.service.js"
 import { BookDetails } from "./book-details.jsx"
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
 
 
@@ -13,6 +14,7 @@ export function BookIndex() {
     const [books, setBooks] = useState([])
     const [selectedBook, setSelectedBook] = useState(null)
     const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter())
+
 
     useEffect(() => {
         loadBooks()
@@ -27,6 +29,7 @@ export function BookIndex() {
         bookService.remove(bookId).then(() => {
             const updatedBooks = books.filter(book => book.id !== bookId)
             setBooks(updatedBooks)
+            showSuccessMsg('Book has been deleted!')
         })
     }
 
@@ -43,6 +46,7 @@ export function BookIndex() {
         <section className="book-index">
             
                 <BookFilter onSetFilter={onSetFilter} filterBy={filterBy} />
+                <button><Link to="/book/edit">Add Book</Link></button>
                 <BookList  books={books} onRemoveBook={onRemoveBook} />
 
         </section>
