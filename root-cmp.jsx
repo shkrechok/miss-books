@@ -10,6 +10,7 @@ import { Home } from "./views/home.jsx"
 import { BookDetails } from "./views/book-details.jsx"
 import { BookEdit } from "./views/book-edit.jsx"
 import { UserMsg } from "./cmps/user-msg.jsx"
+import { AddReview } from "./views/add-review.jsx"
 
 
 export function App() {
@@ -21,7 +22,7 @@ export function App() {
     //     setPage(page)
     // }
 
-// todo: pass header to a separate cmp
+    // todo: pass header to a separate cmp
     return (
         <Router>
             <section className="app main-layout">
@@ -38,6 +39,7 @@ export function App() {
                         <Route path="/" element={<Home />} />
                         <Route path="/about" element={<About />} />
                         <Route path="/book/:bookId" element={<BookDetails />} />
+                        <Route path="/book/:bookId/review" element={<AddReview />} />
                         <Route path="/book/edit/" element={<BookEdit />} />
                         <Route path="/book/edit/:bookId" element={<BookEdit />} />
                         <Route path="/book" element={<BookIndex />} />

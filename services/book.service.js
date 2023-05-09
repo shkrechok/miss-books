@@ -457,6 +457,8 @@ export const bookService = {
     save,
     getEmptyBook,
     getDefaultFilter,
+    getNextBookId,
+    getPrevBookId
 }
 
 function query(filterBy = {}) {
@@ -492,8 +494,40 @@ function save(book) {
     }
 }
 
-function getEmptyBook(title = '', price = 50) {
-    return { id: '', title, listPrice: { amount: price }  }
+function getNextBookId(bookId) {
+  return storageService.query(BOOKS_KEY)
+      .then((books) => {
+          let bookIdx = books.findIndex(book => book.id === bookId)
+          if(bookIdx === books.length - 1) bookIdx = -1
+          return books[bookIdx + 1].id
+      })
+}
+
+function getPrevBookId(bookId) {
+  return storageService.query(BOOKS_KEY)
+      .then((books) => {
+          let bookIdx = books.findIndex(book => book.id === bookId)
+          if(bookIdx === 0) bookIdx = books.length
+          return books[bookIdx - 1].id
+      })
+}
+
+
+function getEmptyBook(title = 'New book',price = 50) {
+  return {
+    id: '',
+    title: title,
+    listPrice: {
+        amount: price,
+        currencyCode: 'USD',
+        isOnSale: false
+    },
+    description: '',
+    pageCount: '',
+    language: '',
+    publishedDate: '',
+    reviews: []
+}
 }
 
 function getDefaultFilter() {

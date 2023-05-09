@@ -4,15 +4,21 @@ import { bookService } from "../services/book.service.js"
 
 const { useEffect, useState } = React
 const { useParams, useNavigate } = ReactRouterDOM
+const { Link, NavLink, Outlet } = ReactRouterDOM
+
 
 export function BookDetails() {
     const [book, setBook] = useState(null)
+    const [nextBookId, setNextBookId] = useState(null)
+    const [prevBookId, setPrevBookId] = useState(null)
     const params = useParams()
     const navigate = useNavigate()
-    
+
     useEffect(() => {
         loadBook()
-    }, [])
+        loadNextBookId()
+        loadPrevBookId()
+    }, [params.bookId])
 
     function loadBook() {
         bookService.get(params.bookId)
@@ -23,7 +29,17 @@ export function BookDetails() {
             })
     }
 
-    
+    function loadNextBookId() {
+        bookService.getNextBookId(params.bookId)
+            .then(setNextBookId)
+    }
+
+    function loadPrevBookId() {
+        bookService.getPrevBookId(params.bookId)
+            .then(setPrevBookId)
+    }
+
+
     function onBack() {
         navigate('/book')
         // navigate(-1)
@@ -43,12 +59,15 @@ export function BookDetails() {
                 {_pageCountToText(book.pageCount) && _publishedDateToText(book.publishedDate) && ' | '}
                 {_publishedDateToText(book.publishedDate)}</h5>
             <img src={book.thumbnail} alt="" />
-            <LongTxt txt={book.description} length={50} />
+            <LongTxt txt={book.description} length={100} />
             <button onClick={onBack}>Back</button>
+            <button><Link to={`/book/${params.bookId}/review`} >Add a review</Link></button>
+            <button><Link to={`/book/${nextBookId}`}>Next book</Link></button>
+            <button><Link to={`/book/${prevBookId}`}>Prev Book</Link></button>
         </section>
     )
 
-    
+
 }
 
 function _pageCountToText(pageCount) {
